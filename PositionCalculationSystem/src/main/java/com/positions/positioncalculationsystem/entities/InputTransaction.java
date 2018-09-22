@@ -34,6 +34,14 @@ public class InputTransaction {
 		return "InputTransaction [transactionId=" + transactionId + ", instrument=" + instrument + ", transactionType="
 				+ transactionType + ", transactionQuantity=" + transactionQuantity + "]";
 	}
+	
+	public InputTransaction(int transactionId, String instrument, char transactionType, int transactionQuantity) {
+		super();
+		this.transactionId = transactionId;
+		this.instrument = instrument;
+		this.transactionType = transactionType;
+		this.transactionQuantity = transactionQuantity;
+	}
 
 	
 	
