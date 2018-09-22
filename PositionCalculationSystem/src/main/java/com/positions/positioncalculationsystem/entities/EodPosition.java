@@ -28,9 +28,14 @@ public class EodPosition extends Position {
 	public int getAbsDelta() {
 		return Math.abs(this.delta);
 	}
-	
-	
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof EodPosition) {
+            return super.equals(obj) && this.delta == ((EodPosition) obj).delta;
+        }
+        return false;
+	}
 	
 	
 	
