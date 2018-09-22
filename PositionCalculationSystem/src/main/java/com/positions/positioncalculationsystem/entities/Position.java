@@ -47,6 +47,16 @@ public class Position {
 		this.accountType = accountType;
 		this.quantity = quantity;
 	}
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		if (obj instanceof Position) {
+            return this.instrument.equals(((Position) obj).instrument) &&
+            		this.accountNo.equals(((Position) obj).accountNo) &&
+            		this.accountType.equals(((Position) obj).accountType) &&
+            		this.quantity.equals(((Position) obj).quantity);
+        }
+        return false;
+	}
 	
 	
 	
