@@ -5,11 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeAll;
-
 import com.positions.positioncalculationsystem.entities.InputTransaction;
 import com.positions.positioncalculationsystem.entities.Position;
 import com.positions.positioncalculationsystem.exceptions.InputPositionException;

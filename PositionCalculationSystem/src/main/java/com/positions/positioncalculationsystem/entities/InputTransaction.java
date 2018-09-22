@@ -35,6 +35,10 @@ public class InputTransaction {
 				+ transactionType + ", transactionQuantity=" + transactionQuantity + "]";
 	}
 	
+	public InputTransaction() {
+		super();
+	}
+	
 	public InputTransaction(int transactionId, String instrument, char transactionType, int transactionQuantity) {
 		super();
 		this.transactionId = transactionId;

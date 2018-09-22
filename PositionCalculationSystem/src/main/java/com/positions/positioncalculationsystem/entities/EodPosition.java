@@ -25,7 +25,9 @@ public class EodPosition extends Position {
 		return "EodPosition "+super.toString()+" [delta=" + delta + "]";
 	}
 
-	
+	public int getAbsDelta() {
+		return Math.abs(this.delta);
+	}
 	
 	
 	

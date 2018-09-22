@@ -15,6 +15,7 @@ import com.positions.positioncalculationsystem.utilities.InputFileValidationsFac
 import com.positions.positioncalculationsystem.utilities.InputJsonReaderFactory;
 import com.positions.positioncalculationsystem.utilities.OutputFileWriterFactory;
 import com.positions.positioncalculationsystem.utilities.EODPositionsComputationFactory;
+import com.positions.positioncalculationsystem.utilities.FindLargestLowestTransactionFactory;
 
 public class MainProcess {
 
@@ -35,6 +36,7 @@ public class MainProcess {
 				//System.out.println(inputPositions);
 			}catch (IOException e) {
 				System.out.println("*** Process Halted: Error in reading Start of Day Instrument Positions : "+e.getMessage()+" ***");
+				throw e;
 			}
 			System.out.println("*** End of the Input Start of Day Instruments Positions extraction ***");
 			
@@ -45,6 +47,7 @@ public class MainProcess {
 				//System.out.println(inputTransactions);
 			}catch (IOException e) {
 				System.out.println("*** Process Halted: Error in reading Input Transactions JSON : "+e.getMessage()+" ***");
+				throw e;
 			}
 			System.out.println("*** End of the Input transactions extraction from JSON file ***");
 			
@@ -53,12 +56,14 @@ public class MainProcess {
 				InputFileValidationsFactory.validateInputPositions(inputPositions);
 			}catch(InputPositionException ipe) {
 				System.out.println("*** Process Halted: Validation error in the input positions file at line number : "+ipe.getLineNo()+" error message : "+ipe.getMessage()+" ***");
+				throw ipe;
 			}
 			
 			try {
 				InputFileValidationsFactory.validateInputTransactions(inputTransactions);
 			}catch(InputTransactionException ipt) {
 				System.out.println("*** Process Halted: Validation error in the input Input Transaction file for trasnaction Id : "+ipt.getTransactionId()+" error message : "+ipt.getMessage()+" ***");
+				throw ipt;
 			}
 			
 			//Computation of List of EOD Positions
@@ -73,8 +78,14 @@ public class MainProcess {
 				//System.out.println(inputTransactions);
 			}catch (IOException | CsvDataTypeMismatchException | CsvRequiredFieldEmptyException e) {
 				System.out.println("*** Process Halted: Error in writing EOD Positions to output file : "+e.getMessage()+" ***");
+				throw e;
 			}
 			System.out.println("*** End of writing EOD Positions to output file ***");
+			
+			//Find the largest and lowest net transaction value Instrument
+			System.out.println("*** Start of Find the largest and lowest net transaction value Instrument ***");	
+			FindLargestLowestTransactionFactory.findLargestLowestTransaction(eodPositions);
+			System.out.println("*** End of Find the largest and lowest net transaction value Instrument ***");
 			
 		}catch (Exception e) {
 			System.out.println("*** Process Halted: Error in Main Process due to unknown exception : "+e.getMessage()+" ***");
